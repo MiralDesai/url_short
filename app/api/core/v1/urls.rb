@@ -10,6 +10,7 @@ module Core
       get '/:short_path' do
         url = Url.find_by(short_path: params[:short_path])
         raise ActiveRecord::RecordNotFound unless url
+        Url.increment_counter(:clicks, url.id)
         redirect url.path, permanent: true
       end
 
