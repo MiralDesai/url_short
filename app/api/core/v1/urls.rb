@@ -20,8 +20,8 @@ module Core
         requires :url, type: String, desc: 'The url you want shortened'
       end
       post '/' do
-        # # TODO: Does shortener already exist? Check here and automatically return
-        url = Url.shorten(url: params[:url])
+        path = Url.format_path(url: params[:url])
+        url = Url.find_by(path: path) || Url.shorten(url: params[:url])
         present url, with: Entities::Url
       end
     end

@@ -1,6 +1,7 @@
 module Core
   module V1
     module Exceptions
+      class InvalidUrlError < StandardError; end
       module Handlers
         extend ActiveSupport::Concern
 
@@ -18,6 +19,17 @@ module Core
               # The developer error is still important for debugging though.
               message[:backtrace] = e.backtrace
             end }, 404)
+          end
+
+          rescue_from InvalidUrlError do |e|
+            error!({ error: {
+              code: 1003,
+              title: I18n.t('INVALID_URL_TITLE'),
+              message: I18n.t('INVALID_URL_MESSAGE'),
+              developer_error: e.message
+            }.tap do |message|
+              message[:backtrace] = e.backtrace
+            end }, 400)
           end
 
           # Catch unexpected errors, fallback for everything else

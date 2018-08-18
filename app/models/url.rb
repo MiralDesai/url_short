@@ -1,26 +1,24 @@
 class Url < ApplicationRecord
   validates :path, uniqueness: { case_sensitive: false }
   validates :short_path, uniqueness: { case_sensitive: true }
+  validates :path, presence: true
+  validates :short_path, presence: true
 
-  before_save :format_path
+  # Validating a URL is a bit of a mess so skipping it
+  # Instead deciding to ping the entered url and only shorten valid sites
+  def self.shorten(url:)
+    raise ::Core::V1::Exceptions::InvalidUrlError unless valid_url?(url)
+    UrlShortener.new(url: url).shorten
+  end
 
-  def shorten(url:)
-    # TODO: Validate url or raise error
-    url = UrlShortener.new(url: url).shorten
+  def self.format_path(url:)
+    UrlShortener.format_path(path: url)
   end
 
   private
 
-  def format_path
-    path.strip! # Remove spaces
-    path.chomp!('/') # Remove trailing slash
-    self.path = httpsify_path(path)
-  end
-
-  # Force https because I feel it's expected these days
-  def httpsify_path(path)
-    uri = URI.parse(path)
-    url.gsub!('http', 'https') if %w[http].include?(uri.scheme)
-    url.prepend('https://') unless uri.scheme
+  def self.valid_url?(url)
+    check = Net::Ping::External.new(url)
+    check.ping?
   end
 end

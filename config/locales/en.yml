@@ -34,3 +34,5 @@ en:
   NOT_FOUND_MESSAGE: Sorry! We couldn't find what you were looking for.
   GENERIC_ERROR_TITLE: An unexpected error occurred
   GENERIC_ERROR_MESSAGE: Something went wrong, please contact support
+  INVALID_URL_TITLE: Invalid url
+  INVALID_URL_MESSAGE: The URL provided does not resolve to a valid address

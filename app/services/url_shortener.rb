@@ -6,7 +6,8 @@ class UrlShortener
   end
 
   def shorten
-    Url.new(path: url, short_path: create_short_path)
+    # Not sure I like calling the class again... but for now it works.
+    Url.create(path: UrlShortener.format_path(path: url), short_path: create_short_path)
   end
 
   private
@@ -17,6 +18,19 @@ class UrlShortener
   def create_short_path
     chars = url.gsub(%r{[.\/:#]}, '').split('')
     '/' + Array.new(rand(1..10)).map { chars.sample }.join
+  end
+
+  def self.format_path(path:)
+    path = path.strip # Remove spaces
+    path = path.chomp('/') # Remove trailing slash
+    httpsify_path(path)
+  end
+
+  # Force https because I feel it's expected these days
+  def self.httpsify_path(path)
+    uri = URI.parse(path)
+    path.gsub!('http', 'https') if %w[http].include?(uri.scheme)
+    path.prepend('https://') unless uri.scheme
   end
 
   attr_reader :url
