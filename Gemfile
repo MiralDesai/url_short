@@ -45,6 +45,10 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  # Generate random data
+  gem 'faker'
+  # Create objects for testing
+  gem 'factory_bot_rails'
 end
 
 group :development do

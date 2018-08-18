@@ -22,7 +22,7 @@ module Core
       post '/' do
         path = Url.format_path(url: params[:url])
         url = Url.find_by(path: path) || Url.shorten(url: params[:url])
-        present url, with: Entities::Url
+        present url, with: Entities::Url, type: :full
       end
     end
   end

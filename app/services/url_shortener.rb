@@ -17,7 +17,7 @@ class UrlShortener
   # Just using the first idea that came to me for now
   def create_short_path
     chars = url.gsub(%r{[.\/:#]}, '').split('')
-    '/' + Array.new(rand(1..10)).map { chars.sample }.join
+    Array.new(rand(1..10)).map { chars.sample }.join
   end
 
   def self.format_path(path:)
