@@ -1,6 +1,7 @@
 module Core
   class ApiV1 < Grape::API
     format :json
+    include V1::Exceptions::Handlers
 
     # TODO: Basic api auth here? Do we even need api authentication?
 

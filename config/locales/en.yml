@@ -30,4 +30,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  NOT_FOUND_TITLE: Not found
+  NOT_FOUND_MESSAGE: Sorry! We couldn't find what you were looking for.
+  GENERIC_ERROR_TITLE: An unexpected error occurred
+  GENERIC_ERROR_MESSAGE: Something went wrong, please contact support
