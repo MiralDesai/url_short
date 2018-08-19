@@ -11,10 +11,6 @@ class Url < ApplicationRecord
     UrlShortener.new(url: url).shorten
   end
 
-  def self.format_path(url:)
-    UrlShortener.format_path(path: url)
-  end
-
   private
 
   def self.valid_url?(url)

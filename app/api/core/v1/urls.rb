@@ -21,8 +21,7 @@ module Core
         requires :url, type: String, desc: 'The url you want shortened'
       end
       post '/' do
-        path = Url.format_path(url: params[:url])
-        url = Url.find_by(path: path) || Url.shorten(url: params[:url])
+        url = Url.shorten(url: params[:url])
         present url, with: Entities::Url, type: :full
       end
     end
