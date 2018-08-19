@@ -15,14 +15,6 @@ RSpec.describe Url, type: :model do
     end
   end
 
-  describe 'when attempting to format a path' do
-    let(:url_path) { 'google.co.uk' }
-    it 'calls the #format_path method in the UrlShortener class' do
-      expect(UrlShortener).to receive(:format_path).with(path: url_path).once
-      described_class.format_path(url: url_path)
-    end
-  end
-
   describe 'when creating a new url' do
     context 'without a short_url' do
       let(:invalid_url) { FactoryBot.build(:url, short_path: nil) }

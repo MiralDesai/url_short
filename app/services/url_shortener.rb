@@ -2,12 +2,11 @@
 # Also makes this quite extendable and could be dropped into any application
 class UrlShortener
   def initialize(url:)
-    @url = url
+    @url = format_path(path: url)
   end
 
   def shorten
-    # Not sure I like calling the class again... but for now it works.
-    Url.create(path: UrlShortener.format_path(path: url), short_path: create_short_path)
+    Url.find_by(path: url) || Url.create(path: url, short_path: create_short_path)
   end
 
   private
@@ -20,17 +19,18 @@ class UrlShortener
     Array.new(rand(1..10)).map { chars.sample }.join
   end
 
-  def self.format_path(path:)
+  def format_path(path:)
     path = path.strip # Remove spaces
     path = path.chomp('/') # Remove trailing slash
     httpsify_path(path)
   end
 
   # Force https because I feel it's expected these days
-  def self.httpsify_path(path)
+  def httpsify_path(path)
     uri = URI.parse(path)
     path.gsub!('http', 'https') if %w[http].include?(uri.scheme)
     path.prepend('https://') unless uri.scheme
+    path
   end
 
   attr_reader :url
