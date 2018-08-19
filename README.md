@@ -27,3 +27,7 @@ Create a shortened URL:
 Redirect to original URL:
 
 `curl localhost:3000/<short_path>`
+
+#### Frontend
+
+With the server running it's also possible to view all created short URLs and create a new one. Visit `localhost:3000/url`.
