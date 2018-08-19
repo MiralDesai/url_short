@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+
+ table, td, th {
+     text-align: left;
+ }
+
+ table {
+     border-collapse: collapse;
+     width: 100%;
+ }
+
+ th, td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+a {
+  background-color: #4d79ff;
+  color: white;
+  padding: 10px 30px;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  border-radius: 22px;
+}
+
+a:hover, a:active {
+    background-color: #99b3ff;
+}

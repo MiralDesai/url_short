@@ -1,0 +1,23 @@
+<h1>😎 💥 Urls 💥 😎</h1>
+<%= link_to "New Url", new_url_path %>
+<br>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Original path</th>
+      <th>Short path</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @urls.each do |url| %>
+      <tr>
+        <td><%= url.path %></td>
+        <td><%= url.short_path %></td>
+        <td><%= link_to "Go", url.short_path %></td>
+        <td><%= link_to "Destroy", url, method: :delete, data: { confirm: "Are you sure?" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
