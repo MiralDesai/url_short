@@ -2,6 +2,8 @@
 
 # Url Short
 
+![CodeCoverage](https://img.shields.io/badge/Code%20coverage-96.76%25-brightgreen.svg)
+
 `A simple URL shortener written in Ruby on Rails.`
 
 # Installation
